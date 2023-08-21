@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="cc.serializer",
-    version="0.0.1",
+    version="0.0.2",
     author="Uncertainty.",
     author_email="t_k_233@outlook.email",
     description="Transmit and receive Serial data and divide the stream into packets with NLSM protocol.",
