@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: cc.serializer
-Version: 0.0.1
+Version: 0.0.4
 Summary: Transmit and receive Serial data and divide the stream into packets with NLSM protocol.
 Home-page: https://github.com/uncertainty-cc/Serializer-Python
 Author: Uncertainty.

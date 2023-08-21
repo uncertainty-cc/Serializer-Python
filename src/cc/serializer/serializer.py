@@ -19,6 +19,9 @@ class Serializer:
     def _transmit(self, data, size):
         pass
 
+    def _flush(self):
+        pass
+
     def setReceiveTimeout(self, timeout):
         pass
 
@@ -48,6 +51,8 @@ class Serializer:
                 self._transmit(c, 1)
             index += 1
         self._transmit(Encoding.END, 1)
+
+        self._flush()
 
     """
     Receive a packet from serial.

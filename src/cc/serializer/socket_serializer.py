@@ -6,8 +6,10 @@ from .serializer import Encoding, Serializer
 import socket
 
 class SocketSerializer(Serializer):
-    def __init__(self, connection):
+    def __init__(self, connection, buffered_transmit=False):
         self._conn = connection
+        self.buffered_transmit = buffered_transmit
+        self.tx_buffer = b""
 
     """
     Set a timeout on blocking socket operations. 
@@ -28,4 +30,11 @@ class SocketSerializer(Serializer):
             return b""
     
     def _transmit(self, data, size):
+        if self.buffered_transmit:
+            self.tx_buffer += data
         self._conn.sendall(data)
+    
+    def _flush(self):
+        if self.buffered_transmit:
+            self._conn.sendall(self.tx_buffer)
+        self.tx_buffer = b""
