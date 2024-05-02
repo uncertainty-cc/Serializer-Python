@@ -1,7 +1,5 @@
 import struct
 
-import serial
-import serial.tools.list_ports
 
 class Encoding:
     END         = b"\x0A"
@@ -29,6 +27,31 @@ class Serializer:
         pass
 
     """
+    Receive a packet from serial.
+
+    @type timeout: float
+    @param timeout: 
+    @return: the data received, or b"" if no data is available
+    """
+    def receive(self, timeout=None):
+        data = b""
+        c = self._receive(1)
+
+        while c != Encoding.END:
+            if c == Encoding.ESC:
+                c = self._receive(1)
+                if c == Encoding.ESC_END:
+                    data += Encoding.END
+                elif c == Encoding.ESC_ESC:
+                    data += Encoding.ESC
+                else:
+                    data += c
+            else:
+                data += c
+            c = self._receive(1)
+        return data
+
+    """
     Transmit a packet to serial.
 
     @type data: bytes
@@ -53,30 +76,3 @@ class Serializer:
         self._transmit(Encoding.END, 1)
 
         self._flush()
-
-    """
-    Receive a packet from serial.
-
-    @type timeout: float
-    @param timeout: 
-    @return: the data received, or b"" if no data is available
-    """
-    def receive(self, timeout=None):
-        c = b""
-        data = b""
-        while c != Encoding.END:
-            if c == Encoding.ESC:
-                c = self._receive(1)
-                if c == Encoding.ESC_END:
-                    data += Encoding.END
-                elif c == Encoding.ESC_ESC:
-                    data += Encoding.ESC
-                else:
-                    data += c
-            else:
-                data += c
-            c = self._receive(1)
-            if c == b"":
-                return data
-        return data
-
