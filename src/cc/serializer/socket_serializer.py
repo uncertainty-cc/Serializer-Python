@@ -1,9 +1,6 @@
-import struct
-import socket
 
-from .serializer import Encoding, Serializer
+from .serializer import Serializer
 
-import socket
 
 class SocketSerializer(Serializer):
     def __init__(self, connection, buffered_transmit=False):

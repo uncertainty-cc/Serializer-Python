@@ -1,9 +1,8 @@
-import struct
-
 import serial
 import serial.tools.list_ports
 
 from .serializer import Encoding, Serializer
+
 
 class UARTSerializer(Serializer):
     def __init__(self, port=None, baudrate=115200):

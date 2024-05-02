@@ -1,9 +1,5 @@
-import struct
-import socket
 
-from .serializer import Encoding, Serializer
-
-import socket
+from .serializer import Serializer
 
 class BufferSerializer(Serializer):
     def __init__(self):
