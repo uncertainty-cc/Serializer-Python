@@ -16,7 +16,7 @@ class SocketSerializer(Serializer):
     If zero is given, the socket is put in non-blocking mode. 
     If None is given, the socket is put in blocking mode.
     """
-    def setReceiveTimeout(self, timeout):
+    def set_receive_timeout(self, timeout):
         self._conn.settimeout(timeout)
 
     def _receive(self, size, timeout=None):

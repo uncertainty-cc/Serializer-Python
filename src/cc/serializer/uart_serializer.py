@@ -1,7 +1,7 @@
 import serial
 import serial.tools.list_ports
 
-from .serializer import Encoding, Serializer
+from .serializer import Serializer
 
 
 class UARTSerializer(Serializer):
@@ -12,7 +12,7 @@ class UARTSerializer(Serializer):
         if not self._port:
             # if no port is supplied, we enumerate the available ports
             # and try the first one
-            ports = UARTSerializer.getAvailablePorts()
+            ports = UARTSerializer.get_available_ports()
             if ports:
                 self._port = ports[0]
                 print("No \"port\" argument supplied, using {0}.".format(self._port))
@@ -21,7 +21,7 @@ class UARTSerializer(Serializer):
             port=self._port, baudrate=baudrate, timeout=None)
 
     @staticmethod
-    def getAvailablePorts():
+    def get_available_ports():
         ports = [p.name for p in serial.tools.list_ports.comports()]
         return ports
         
@@ -30,10 +30,10 @@ class UARTSerializer(Serializer):
     timeout = 0: non-blocking mode, return immediately in any case, returning zero or more, up to the requested number of bytes
     timeout = x: set timeout to x seconds (float allowed) returns immediately when the requested number of bytes are available, otherwise wait until the timeout expires and return all bytes that were received until then.
     """
-    def setReceiveTimeout(self, timeout):
+    def set_receive_timeout(self, timeout):
         self._ser.timeout = timeout
         
-    def setTransmitTimeout(self, timeout):
+    def set_transmit_timeout(self, timeout):
         self._ser.write_timeout = timeout
 
     def _receive(self, size):

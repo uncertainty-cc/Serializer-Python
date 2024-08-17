@@ -20,10 +20,10 @@ class Serializer:
     def _flush(self):
         pass
 
-    def setReceiveTimeout(self, timeout):
+    def set_receive_timeout(self, timeout):
         pass
 
-    def setTransmitTimeout(self, timeout):
+    def set_transmit_timeout(self, timeout):
         pass
 
     """
