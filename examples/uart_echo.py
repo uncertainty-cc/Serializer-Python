@@ -9,7 +9,7 @@ time.sleep(2)
 
 ser.transmit(b"hello")
 
-ser.setReceiveTimeout(0.1)
+ser.set_receive_timeout(0.1)
 
 while True:
     buffer = ser.receive()

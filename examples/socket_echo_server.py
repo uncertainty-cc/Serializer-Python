@@ -11,7 +11,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print("Connected by", addr)
 
         ser = SocketSerializer(conn)
-        ser.setReceiveTimeout(0.1)
+        ser.set_receive_timeout(0.1)
         
         while True:
             buffer = ser.receive()

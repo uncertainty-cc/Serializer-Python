@@ -10,7 +10,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
     ser.transmit(b'Hello, world')
     
-    ser.setReceiveTimeout(0.1)
+    ser.set_receive_timeout(0.1)
 
     counter = 0
     while True:
